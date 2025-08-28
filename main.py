@@ -4,7 +4,7 @@ from parse import parse_with_ollama
 import pandas as pd
 
 st.title("AI Web Scraper")
-url = st.text_input("Enter the URL to scrape:")
+url = st.text_input("Enter the URL: ")
 
 if st.button("Scrape Site"):
     st.write("Scraping from:", url)
@@ -53,3 +53,4 @@ if "dom_content" in st.session_state:
                                     data= f.read(), 
                                     file_name=csv_file,
                                     mime="text/csv")
+
