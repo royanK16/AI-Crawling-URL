@@ -39,11 +39,17 @@ if "dom_content" in st.session_state:
             st.write("Waiting for response...")
             dom_chunk = split_dom_content(st.session_state.dom_content)
             result = parse_with_ollama(dom_chunk, parse_description)
+            st.session_state.parse_result = result
             st.write(result)
-
-            if st.button("Export Result to CSV file"):
-                csv_file = export_to_csv(result)
-                st.write(f"Waiting for exporting to CSV file....")
-                st.success(f"Result exported to {csv_file}")
-                with open(csv_file, "rb") as f:
-                    st.download_button("Download CSV", f, filename=csv_file)
+            
+    if "parse_result" in st.session_state and st.session_state.parse_result is not None:
+        if st.button("Export Result to CSV file"):
+            csv_file = export_to_csv(st.session_state.parse_result)
+            st.write(f"Waiting for exporting to CSV file....")
+            st.success(f"Result exported to {csv_file}")
+            
+            with open(csv_file, "rb") as f:
+                st.download_button(label="Download CSV", 
+                                    data= f.read(), 
+                                    file_name=csv_file,
+                                    mime="text/csv")
