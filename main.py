@@ -6,10 +6,10 @@ import pandas as pd
 st.title("AI Web Scraper")
 url = st.text_input("Enter the URL: ")
 
-if st.button("Scrape Site"):
+if st.button("Scrape"):
     st.write("Scraping from:", url)
     result = scrape_website(url)
-    st.write("Scraping complete!")
+    st.write("Scraping complete !")
     
     body_content = extract_body_content(result)
     cleaned_content = clean_body_content(body_content)
@@ -53,4 +53,5 @@ if "dom_content" in st.session_state:
                                     data= f.read(), 
                                     file_name=csv_file,
                                     mime="text/csv")
+
 
