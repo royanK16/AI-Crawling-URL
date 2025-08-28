@@ -3,7 +3,7 @@ from selenium.webdriver.chromium.remote_connection import ChromiumRemoteConnecti
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 
-AUTH = ''
+AUTH = 'brd-customer-hl_c6eda0bb-zone-ai_scraper:tzrhnzxe95eb'
 SBR_WEBDRIVER = f'https://{AUTH}@brd.superproxy.io:9515'
 
 def scrape_website(website):
@@ -40,4 +40,5 @@ def split_dom_content(dom_content, max_length=6000):
         dom_content[i:i + max_length] for i in range(0, len(dom_content), max_length)
     ]
     
+
 
