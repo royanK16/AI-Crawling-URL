@@ -31,6 +31,7 @@ if st.button("Scrape Site"):
             
             body_content = extract_body_content(result)
             cleaned_content = clean_body_content(body_content)
+            split_content = split_dom_content(cleaned_content)
             
             st.session_state.dom_content = cleaned_content
             st.session_state.parse_result = None  # Reset parse result
@@ -75,3 +76,4 @@ if "dom_content" in st.session_state and st.session_state.dom_content:
                 file_name="data.csv",
                 mime="text/csv"
             )
+
