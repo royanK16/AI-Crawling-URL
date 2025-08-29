@@ -12,10 +12,10 @@ def scrape_website(website):
         # Configure Chrome options for headless mode
         chrome_options = Options()
         chrome_options.add_argument("--start-maximized")
-        options.add_argument("--headless")
-        options.add_argument("--no-sandbox")
-        options.add_argument("--disable-dev-shm-usage")
-        options.add_argument("--disable-gpu")
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--disable-dev-shm-usage")
+        chrome_options.add_argument("--disable-gpu")
         
         # Use webdriver-manager to automatically handle the ChromeDriver
         service = Service(ChromeDriverManager().install())
@@ -60,5 +60,6 @@ def split_dom_content(dom_content, max_length=6000):
     return [
         dom_content[i:i + max_length] for i in range(0, len(dom_content), max_length)
     ]
+
 
 
