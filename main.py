@@ -24,20 +24,23 @@ def export_to_csv(data, filename="data.csv"):
 
 if st.button("Scrape Site"):
     if url:
-        st.info("Scraping from: " + url)
+        st.info("Scraping from: " + url)      
         try:
             result = scrape_website(url)
-            st.success("Scraping complete!")
+            if result:
+                st.success("Scraping complete!")
+                body_content = extract_body_content(result)
+                cleaned_content = clean_body_content(body_content)
+                split_content = split_dom_content(cleaned_content)
             
-            body_content = extract_body_content(result)
-            cleaned_content = clean_body_content(body_content)
-            split_content = split_dom_content(cleaned_content)
+                st.session_state.dom_content = cleaned_content
+                st.session_state.parse_result = None  # Reset parse result
             
-            st.session_state.dom_content = cleaned_content
-            st.session_state.parse_result = None  # Reset parse result
-            
-            with st.expander("View DOM Content"):
-                st.text_area("DOM Content", cleaned_content, height=300)
+                with st.expander("View DOM Content"):
+                    st.text_area("DOM Content", cleaned_content, height=300)
+            else: 
+                st.error("Scraping failed. No content was returned. Please check the URL.")
+                
         except Exception as e:
             st.error(f"An error occurred during scraping: {e}")
     else:
@@ -76,4 +79,5 @@ if "dom_content" in st.session_state and st.session_state.dom_content:
                 file_name="data.csv",
                 mime="text/csv"
             )
+
 
