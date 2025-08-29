@@ -18,7 +18,7 @@ def scrape_website(website):
         chrome_options.add_argument("--disable-gpu")
         
         # Use webdriver-manager to automatically handle the ChromeDriver
-        service = Service(ChromeDriverManager(driver_version="114.0.5735.90").install())
+        service = Service(ChromeDriverManager().install())
         driver = webdriver.Chrome(service=service, options=chrome_options)
         
         print("Launching headless Chrome browser...")
@@ -60,6 +60,7 @@ def split_dom_content(dom_content, max_length=6000):
     return [
         dom_content[i:i + max_length] for i in range(0, len(dom_content), max_length)
     ]
+
 
 
 
