@@ -5,12 +5,8 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from bs4 import BeautifulSoup
 from webdriver_manager.chrome import ChromeDriverManager
-#import re
 
 def scrape_website(website):
-    """
-    Scrapes a website using a headless Chrome browser.
-    """
     try:
         # Configure Chrome options for headless mode
         options = Options()
@@ -33,8 +29,7 @@ def scrape_website(website):
         return html
     
     finally:
-        if 'driver' in locals():
-            driver.quit()
+        driver.quit()
 
 def extract_body_content(html_content):
     soup = BeautifulSoup(html_content, "html.parser")
@@ -56,3 +51,4 @@ def split_dom_content(dom_content, max_length=7000):
     return [
         dom_content[i:i + max_length] for i in range(0, len(dom_content), max_length)
     ]
+
