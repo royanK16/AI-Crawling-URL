@@ -28,10 +28,6 @@ def scrape_website(website):
         
         html = driver.page_source
         return html
-        
-    except Exception as e:
-        print(f"An error occurred during scraping: {e}")
-        return None
     
     finally:
         if driver:
@@ -44,18 +40,18 @@ def extract_body_content(html_content):
 
 def clean_body_content(body_content):
     soup = BeautifulSoup(body_content, "html.parser")
-    for script in soup(["script", "style", "header"]):
+    for script in soup(["script", "style", "nav", "header", "footer"]):
         script.extract()
     
     # Get text and clean it
-    text = soup.get_text(separator=",")
-    text = ",".join(line.strip() for line in text.splitlines() if line.strip())
+    text = soup.get_text()
+    lines = (line.strip() for line in text.splitlines())
+    chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
+    text = '\n'.join(chunk for chunk in chunks if chunk)
     
     return text
 
-def split_dom_content(dom_content, max_length=7000):
+def split_dom_content(dom_content, max_length=6000):
     return [
         dom_content[i:i + max_length] for i in range(0, len(dom_content), max_length)
     ]
-
-
