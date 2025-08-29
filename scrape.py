@@ -28,6 +28,10 @@ def scrape_website(website):
         
         html = driver.page_source
         return html
+        
+    except Exception as e:
+        st.error(f"An error occurred during scraping: {e}")
+        return None
     
     finally:
         if driver:
@@ -55,3 +59,4 @@ def split_dom_content(dom_content, max_length=6000):
     return [
         dom_content[i:i + max_length] for i in range(0, len(dom_content), max_length)
     ]
+
