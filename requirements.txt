@@ -1,12 +1,11 @@
-streamlit 
-langchain 
+streamlit
+webdriver-manager
+langchain
 langchain-core
 langchain-google-genai
-google-genai
 selenium
 beautifulsoup4
-lxml 
 html5lib
-python-dotenv
 httpx
-webdriver-manager
+
+
